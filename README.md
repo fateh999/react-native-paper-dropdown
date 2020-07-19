@@ -1,1 +1,1 @@
-# react-native-paper-drop-down
+# react-native-paper-dropdown
