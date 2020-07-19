@@ -1,0 +1,30 @@
+{
+  "name": "react-native-paper-dropdown",
+  "version": "1.0.0",
+  "description": "Dropdown component using React Native Paper TextInput and Menu",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fateh999/react-native-paper-dropdown.git"
+  },
+  "keywords": [
+    "Dropdown",
+    "Material",
+    "Dropdown",
+    "React",
+    "Native",
+    "Paper"
+  ],
+  "author": "Fateh Farooqui",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fateh999/react-native-paper-dropdown/issues"
+  },
+  "homepage": "https://github.com/fateh999/react-native-paper-dropdown#readme",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  }
+}
