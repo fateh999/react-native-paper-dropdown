@@ -1,5 +1,5 @@
 {
-  "name": "reactNativePaperDropdown",
+  "name": "react-native-paper-dropdown-example",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -29,6 +29,7 @@
     "jest": "^25.1.0",
     "metro-react-native-babel-preset": "^0.59.0",
     "prettier": "^2.0.4",
+    "react-native-paper-dropdown": "file:../",
     "react-test-renderer": "16.13.1",
     "typescript": "^3.8.3"
   },

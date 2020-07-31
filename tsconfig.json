@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "lib": ["es6"],
+    "declaration": true,
+    "declarationDir": "./dist",
+    "strict": true,
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": false,
+    "noUnusedParameters": true,
+    "strictNullChecks": true,
+    "moduleResolution": "node",
+    "noImplicitAny": true,
+    "outDir": "./dist",
+    "target": "esnext",
+    "jsx": "react-native",
+    "skipLibCheck": true,
+    "typeRoots": ["node_modules/@types"]
+  },
+  "include": ["./src/DropDown.tsx"],
+  "exclude": ["./node_modules", "./Example"]
+}
