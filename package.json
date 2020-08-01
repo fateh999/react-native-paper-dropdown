@@ -1,6 +1,6 @@
 {
   "name": "react-native-paper-dropdown",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "Dropdown component using React Native Paper TextInput and Menu",
   "files": [
     "dist"
@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/fateh999/react-native-paper-dropdown#readme",
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
+    "registry": "https://registry.npmjs.org/"
   },
   "peerDependencies": {
     "react": "*",
