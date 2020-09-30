@@ -2,12 +2,13 @@ import {
   LayoutChangeEvent,
   ScrollView,
   TouchableWithoutFeedback,
-} from 'react-native';
-import { Menu, TextInput, TouchableRipple, useTheme } from 'react-native-paper';
-import React, { ReactNode, forwardRef, useEffect, useState } from 'react';
+  View,
+} from "react-native";
+import { Menu, TextInput, TouchableRipple, useTheme } from "react-native-paper";
+import React, { ReactNode, forwardRef, useEffect, useState } from "react";
 
-import { TextInputProps } from 'react-native-paper/lib/typescript/src/components/TextInput/TextInput';
-import { Theme } from 'react-native-paper/lib/typescript/src/types';
+import { TextInputProps } from "react-native-paper/lib/typescript/src/components/TextInput/TextInput";
+import { Theme } from "react-native-paper/lib/typescript/src/types";
 
 type Without<T, K> = Pick<T, Exclude<keyof T, K>>;
 
@@ -19,7 +20,7 @@ export interface DropDownPropsInterface {
   setValue: (_value: string | number) => void;
   label?: string | undefined;
   placeholder?: string | undefined;
-  mode?: 'outlined' | 'flat' | undefined;
+  mode?: "outlined" | "flat" | undefined;
   inputProps?: TextInputPropsWithoutTheme;
   list: Array<{
     label: string;
@@ -31,7 +32,7 @@ export interface DropDownPropsInterface {
   theme?: Theme;
 }
 
-type TextInputPropsWithoutTheme = Without<TextInputProps, 'theme'>;
+type TextInputPropsWithoutTheme = Without<TextInputProps, "theme">;
 
 const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
   (props, ref) => {
@@ -51,7 +52,7 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
       dropDownContainerMaxHeight,
       theme,
     } = props;
-    const [displayValue, setDisplayValue] = useState('');
+    const [displayValue, setDisplayValue] = useState("");
     const [inputLayout, setInputLayout] = useState({
       height: 0,
       width: 0,
@@ -77,15 +78,17 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
         theme={theme}
         anchor={
           <TouchableRipple ref={ref} onPress={showDropDown} onLayout={onLayout}>
-            <TextInput
-              value={displayValue}
-              mode={mode}
-              label={label}
-              placeholder={placeholder}
-              pointerEvents={'none'}
-              theme={theme}
-              {...inputProps}
-            />
+            <View pointerEvents={"none"}>
+              <TextInput
+                value={displayValue}
+                mode={mode}
+                label={label}
+                placeholder={placeholder}
+                pointerEvents={"none"}
+                theme={theme}
+                {...inputProps}
+              />
+            </View>
           </TouchableRipple>
         }
         style={{
