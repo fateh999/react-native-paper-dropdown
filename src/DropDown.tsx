@@ -106,7 +106,7 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
                 color:
                   value === _item.value
                     ? activeColor || (theme || activeTheme).colors.primary
-                    : undefined,
+                    : ((theme || activeTheme) ? (theme || activeTheme).colors.text : undefined),
               }}
               onPress={() => {
                 setValue(_item.value);

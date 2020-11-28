@@ -33,7 +33,7 @@ const DropDown = forwardRef((props, ref) => {
           {list.map((_item, _index) => (<Menu.Item key={_index} theme={theme} titleStyle={{
         color: value === _item.value
             ? activeColor || (theme || activeTheme).colors.primary
-            : undefined,
+            : ((theme || activeTheme) ? (theme || activeTheme).colors.text : undefined),
     }} onPress={() => {
         setValue(_item.value);
         if (onDismiss) {
