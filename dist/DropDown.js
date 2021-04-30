@@ -39,7 +39,7 @@ const DropDown = forwardRef((props, ref) => {
                 if (onDismiss) {
                     onDismiss();
                 }
-            }} title={_item.custom || _item.label} style={{ width: inputLayout?.width }}/>))}
+            }} title={_item.custom || _item.label} style={{ maxWidth: inputLayout?.width }}/>))}
         </ScrollView>
       </Menu>);
 });

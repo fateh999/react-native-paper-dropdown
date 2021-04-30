@@ -113,7 +113,7 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
                 }
               }}
               title={_item.custom || _item.label}
-              style={{ width: inputLayout?.width }}
+              style={{ maxWidth: inputLayout?.width }}
             />
           ))}
         </ScrollView>
