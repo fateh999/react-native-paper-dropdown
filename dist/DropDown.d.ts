@@ -1,5 +1,4 @@
-import { TouchableWithoutFeedback } from "react-native";
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import { Theme } from "react-native-paper/lib/typescript/types";
 import { TextInputProps } from "react-native-paper/lib/typescript/components/TextInput/TextInput";
 declare type Without<T, K> = Pick<T, Exclude<keyof T, K>>;
@@ -23,5 +22,5 @@ export interface DropDownPropsInterface {
     theme?: Theme;
 }
 declare type TextInputPropsWithoutTheme = Without<TextInputProps, "theme">;
-declare const DropDown: React.ForwardRefExoticComponent<DropDownPropsInterface & React.RefAttributes<TouchableWithoutFeedback>>;
+declare const DropDown: any;
 export default DropDown;

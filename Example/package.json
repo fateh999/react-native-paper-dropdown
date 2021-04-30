@@ -13,6 +13,7 @@
     "react": "16.13.1",
     "react-native": "0.63.0",
     "react-native-paper": "^4.0.1",
+    "react-native-paper-dropdown": "^1.0.0",
     "react-native-vector-icons": "^7.0.0"
   },
   "devDependencies": {
@@ -29,7 +30,6 @@
     "jest": "^25.1.0",
     "metro-react-native-babel-preset": "^0.59.0",
     "prettier": "^2.0.4",
-    "react-native-paper-dropdown": "file:../",
     "react-test-renderer": "16.13.1",
     "typescript": "^3.8.3"
   },
