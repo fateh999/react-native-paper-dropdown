@@ -25,21 +25,21 @@ const DropDown = forwardRef((props, ref) => {
               <TextInput value={displayValue} mode={mode} label={label} placeholder={placeholder} pointerEvents={"none"} theme={theme} {...inputProps}/>
             </View>
           </TouchableRipple>} style={{
-        maxWidth: inputLayout?.width,
-        width: inputLayout?.width,
-        marginTop: inputLayout?.height,
-    }}>
+            maxWidth: inputLayout?.width,
+            width: inputLayout?.width,
+            marginTop: inputLayout?.height,
+        }}>
         <ScrollView style={{ maxHeight: dropDownContainerMaxHeight || 200 }}>
-          {list.map((_item, _index) => (<Menu.Item key={_index} theme={theme} titleStyle={{
-        color: value === _item.value
-            ? activeColor || (theme || activeTheme).colors.primary
-            : undefined,
-    }} onPress={() => {
-        setValue(_item.value);
-        if (onDismiss) {
-            onDismiss();
-        }
-    }} title={_item.custom || _item.label} style={{ width: inputLayout?.width }}/>))}
+          {list.map((_item, _index) => (<Menu.Item key={_index} titleStyle={{
+                color: value === _item.value
+                    ? activeColor || (theme || activeTheme).colors.primary
+                    : (theme || activeTheme).colors.text,
+            }} onPress={() => {
+                setValue(_item.value);
+                if (onDismiss) {
+                    onDismiss();
+                }
+            }} title={_item.custom || _item.label} style={{ width: inputLayout?.width }}/>))}
         </ScrollView>
       </Menu>);
 });

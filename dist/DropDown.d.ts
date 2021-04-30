@@ -1,7 +1,7 @@
 import { TouchableWithoutFeedback } from "react-native";
 import React, { ReactNode } from "react";
-import { TextInputProps } from "react-native-paper/lib/typescript/src/components/TextInput/TextInput";
-import { Theme } from "react-native-paper/lib/typescript/src/types";
+import { Theme } from "react-native-paper/lib/typescript/types";
+import { TextInputProps } from "react-native-paper/lib/typescript/components/TextInput/TextInput";
 declare type Without<T, K> = Pick<T, Exclude<keyof T, K>>;
 export interface DropDownPropsInterface {
     visible: boolean;

@@ -1,7 +1,6 @@
 import {Appbar, Provider, TextInput} from 'react-native-paper';
 import React, {Dispatch, SetStateAction, useState} from 'react';
-import {SafeAreaView, StatusBar, StyleSheet, View} from 'react-native';
-
+import {SafeAreaView, StatusBar, StyleSheet} from 'react-native';
 import DropDown from 'react-native-paper-dropdown';
 
 function App() {

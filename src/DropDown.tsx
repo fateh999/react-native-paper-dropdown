@@ -6,9 +6,8 @@ import {
 } from "react-native";
 import { Menu, TextInput, TouchableRipple, useTheme } from "react-native-paper";
 import React, { ReactNode, forwardRef, useEffect, useState } from "react";
-
-import { TextInputProps } from "react-native-paper/lib/typescript/src/components/TextInput/TextInput";
-import { Theme } from "react-native-paper/lib/typescript/src/types";
+import { Theme } from "react-native-paper/lib/typescript/types";
+import { TextInputProps } from "react-native-paper/lib/typescript/components/TextInput/TextInput";
 
 type Without<T, K> = Pick<T, Exclude<keyof T, K>>;
 
@@ -101,12 +100,11 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
           {list.map((_item, _index) => (
             <Menu.Item
               key={_index}
-              theme={theme}
               titleStyle={{
                 color:
                   value === _item.value
                     ? activeColor || (theme || activeTheme).colors.primary
-                    : undefined,
+                    : (theme || activeTheme).colors.text,
               }}
               onPress={() => {
                 setValue(_item.value);
