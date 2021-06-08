@@ -1,7 +1,7 @@
 import {Appbar, Provider, TextInput} from 'react-native-paper';
 import React, {Dispatch, SetStateAction, useState} from 'react';
 import {SafeAreaView, StatusBar, StyleSheet} from 'react-native';
-import DropDown from 'react-native-paper-dropdown';
+import DropDown from './src/DropDown';
 
 function App() {
   const [showDropDown, setShowDropDown] = useState(false);

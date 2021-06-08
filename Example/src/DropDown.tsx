@@ -4,11 +4,11 @@ import {
   TouchableWithoutFeedback,
   View,
   ViewStyle,
-} from "react-native";
-import { Menu, TextInput, TouchableRipple, useTheme } from "react-native-paper";
-import React, { ReactNode, forwardRef, useEffect, useState } from "react";
-import { Theme } from "react-native-paper/lib/typescript/types";
-import { TextInputProps } from "react-native-paper/lib/typescript/components/TextInput/TextInput";
+} from 'react-native';
+import {Menu, TextInput, TouchableRipple, useTheme} from 'react-native-paper';
+import React, {ReactNode, forwardRef, useEffect, useState} from 'react';
+import {Theme} from 'react-native-paper/lib/typescript/types';
+import {TextInputProps} from 'react-native-paper/lib/typescript/components/TextInput/TextInput';
 
 type Without<T, K> = Pick<T, Exclude<keyof T, K>>;
 
@@ -20,7 +20,7 @@ export interface DropDownPropsInterface {
   setValue: (_value: string | number) => void;
   label?: string | undefined;
   placeholder?: string | undefined;
-  mode?: "outlined" | "flat" | undefined;
+  mode?: 'outlined' | 'flat' | undefined;
   inputProps?: TextInputPropsWithoutTheme;
   list: Array<{
     label: string;
@@ -34,7 +34,7 @@ export interface DropDownPropsInterface {
   dropDownItemStyle?: ViewStyle;
 }
 
-type TextInputPropsWithoutTheme = Without<TextInputProps, "theme">;
+type TextInputPropsWithoutTheme = Without<TextInputProps, 'theme'>;
 
 const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
   (props, ref) => {
@@ -56,7 +56,7 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
       dropDownStyle,
       dropDownItemStyle,
     } = props;
-    const [displayValue, setDisplayValue] = useState("");
+    const [displayValue, setDisplayValue] = useState('');
     const [inputLayout, setInputLayout] = useState({
       height: 0,
       width: 0,
@@ -82,13 +82,13 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
         theme={theme}
         anchor={
           <TouchableRipple ref={ref} onPress={showDropDown} onLayout={onLayout}>
-            <View pointerEvents={"none"}>
+            <View pointerEvents={'none'}>
               <TextInput
                 value={displayValue}
                 mode={mode}
                 label={label}
                 placeholder={placeholder}
-                pointerEvents={"none"}
+                pointerEvents={'none'}
                 theme={theme}
                 {...inputProps}
               />
@@ -100,9 +100,8 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
           width: inputLayout?.width,
           marginTop: inputLayout?.height,
           ...dropDownStyle,
-        }}
-      >
-        <ScrollView style={{ maxHeight: dropDownContainerMaxHeight || 200 }}>
+        }}>
+        <ScrollView style={{maxHeight: dropDownContainerMaxHeight || 200}}>
           {list.map((_item, _index) => (
             <Menu.Item
               key={_index}
@@ -119,13 +118,13 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
                 }
               }}
               title={_item.custom || _item.label}
-              style={{ maxWidth: inputLayout?.width, ...dropDownItemStyle }}
+              style={{maxWidth: inputLayout?.width, ...dropDownItemStyle}}
             />
           ))}
         </ScrollView>
       </Menu>
     );
-  }
+  },
 );
 
 export default DropDown;

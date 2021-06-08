@@ -3,7 +3,7 @@ import { Menu, TextInput, TouchableRipple, useTheme } from "react-native-paper";
 import React, { forwardRef, useEffect, useState } from "react";
 const DropDown = forwardRef((props, ref) => {
     const activeTheme = useTheme();
-    const { visible, onDismiss, showDropDown, value, setValue, activeColor, mode, label, placeholder, inputProps, list, dropDownContainerMaxHeight, theme, } = props;
+    const { visible, onDismiss, showDropDown, value, setValue, activeColor, mode, label, placeholder, inputProps, list, dropDownContainerMaxHeight, theme, dropDownStyle, dropDownItemStyle, } = props;
     const [displayValue, setDisplayValue] = useState("");
     const [inputLayout, setInputLayout] = useState({
         height: 0,
@@ -28,6 +28,7 @@ const DropDown = forwardRef((props, ref) => {
             maxWidth: inputLayout?.width,
             width: inputLayout?.width,
             marginTop: inputLayout?.height,
+            ...dropDownStyle,
         }}>
         <ScrollView style={{ maxHeight: dropDownContainerMaxHeight || 200 }}>
           {list.map((_item, _index) => (<Menu.Item key={_index} titleStyle={{
@@ -39,7 +40,7 @@ const DropDown = forwardRef((props, ref) => {
                 if (onDismiss) {
                     onDismiss();
                 }
-            }} title={_item.custom || _item.label} style={{ maxWidth: inputLayout?.width }}/>))}
+            }} title={_item.custom || _item.label} style={{ maxWidth: inputLayout?.width, ...dropDownItemStyle }}/>))}
         </ScrollView>
       </Menu>);
 });
