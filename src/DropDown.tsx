@@ -1,9 +1,8 @@
 import {
-  LayoutChangeEvent,
   ScrollView,
   TouchableWithoutFeedback,
   View,
-  ViewStyle,
+  ViewStyle,        
 } from "react-native";
 import { Menu, TextInput, TouchableRipple, useTheme } from "react-native-paper";
 import React, { ReactNode, forwardRef, useEffect, useState } from "react";
@@ -57,16 +56,6 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
       dropDownItemStyle,
     } = props;
     const [displayValue, setDisplayValue] = useState("");
-    const [inputLayout, setInputLayout] = useState({
-      height: 0,
-      width: 0,
-      x: 0,
-      y: 0,
-    });
-
-    const onLayout = (event: LayoutChangeEvent) => {
-      setInputLayout(event.nativeEvent.layout);
-    };
 
     useEffect(() => {
       const _label = list.find((_) => _.value === value)?.label;
@@ -81,7 +70,7 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
         onDismiss={onDismiss}
         theme={theme}
         anchor={
-          <TouchableRipple ref={ref} onPress={showDropDown} onLayout={onLayout}>
+          <TouchableRipple ref={ref} onPress={showDropDown}>
             <View pointerEvents={"none"}>
               <TextInput
                 value={displayValue}
@@ -90,17 +79,12 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
                 placeholder={placeholder}
                 pointerEvents={"none"}
                 theme={theme}
+                style={{...dropDownStyle}}
                 {...inputProps}
               />
             </View>
           </TouchableRipple>
         }
-        style={{
-          maxWidth: inputLayout?.width,
-          width: inputLayout?.width,
-          marginTop: inputLayout?.height,
-          ...dropDownStyle,
-        }}
       >
         <ScrollView style={{ maxHeight: dropDownContainerMaxHeight || 200 }}>
           {list.map((_item, _index) => (
@@ -119,7 +103,7 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
                 }
               }}
               title={_item.custom || _item.label}
-              style={{ maxWidth: inputLayout?.width, ...dropDownItemStyle }}
+              style={{...dropDownItemStyle}}
             />
           ))}
         </ScrollView>
