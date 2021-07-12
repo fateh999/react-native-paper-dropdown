@@ -1,6 +1,7 @@
 import {
   LayoutChangeEvent,
   ScrollView,
+  TextStyle,
   TouchableWithoutFeedback,
   View,
   ViewStyle,
@@ -28,10 +29,14 @@ export interface DropDownPropsInterface {
     custom?: ReactNode;
   }>;
   dropDownContainerMaxHeight?: number;
+  dropDownContainerHeight?: number;
   activeColor?: string;
   theme?: Theme;
   dropDownStyle?: ViewStyle;
+  dropDownItemSelectedTextStyle?: TextStyle;
+  dropDownItemSelectedStyle?: ViewStyle;
   dropDownItemStyle?: ViewStyle;
+  dropDownItemTextStyle?: TextStyle;
 }
 
 type TextInputPropsWithoutTheme = Without<TextInputProps, "theme">;
@@ -52,9 +57,13 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
       inputProps,
       list,
       dropDownContainerMaxHeight,
+      dropDownContainerHeight,
       theme,
       dropDownStyle,
       dropDownItemStyle,
+      dropDownItemSelectedStyle,
+      dropDownItemTextStyle,
+      dropDownItemSelectedTextStyle,
     } = props;
     const [displayValue, setDisplayValue] = useState("");
     const [inputLayout, setInputLayout] = useState({
@@ -102,7 +111,17 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
           ...dropDownStyle,
         }}
       >
-        <ScrollView style={{ maxHeight: dropDownContainerMaxHeight || 200 }}>
+        <ScrollView
+          style={{
+            ...(dropDownContainerHeight
+              ? {
+                  height: dropDownContainerHeight,
+                }
+              : {
+                  maxHeight: dropDownContainerMaxHeight || 200,
+                }),
+          }}
+        >
           {list.map((_item, _index) => (
             <Menu.Item
               key={_index}
@@ -111,6 +130,9 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
                   value === _item.value
                     ? activeColor || (theme || activeTheme).colors.primary
                     : (theme || activeTheme).colors.text,
+                ...(value === _item.value
+                  ? dropDownItemSelectedTextStyle
+                  : dropDownItemTextStyle),
               }}
               onPress={() => {
                 setValue(_item.value);
@@ -119,7 +141,12 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
                 }
               }}
               title={_item.custom || _item.label}
-              style={{ maxWidth: inputLayout?.width, ...dropDownItemStyle }}
+              style={{
+                maxWidth: inputLayout?.width,
+                ...(value === _item.value
+                  ? dropDownItemSelectedStyle
+                  : dropDownItemStyle),
+              }}
             />
           ))}
         </ScrollView>
