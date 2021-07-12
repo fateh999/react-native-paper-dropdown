@@ -26,12 +26,6 @@ npm i react-native-paper-dropdown
 
 ```
 
-## Demo
-
-![Android](https://imgur.com/bsAAVMI.png)
-
-![iOS](https://i.imgur.com/yRBnR80.png)
-
 ## Basic Example
 
 ```javascript
@@ -89,6 +83,12 @@ const styles = StyleSheet.create({
 
 export default Example;
 ```
+
+## Demo
+
+![Android](https://imgur.com/bsAAVMI.png)
+
+![iOS](https://i.imgur.com/yRBnR80.png)
 
 ## Props
 
