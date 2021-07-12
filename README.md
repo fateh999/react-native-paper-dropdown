@@ -26,6 +26,10 @@ npm i react-native-paper-dropdown
 
 ```
 
+## Documentation :
+
+- [https://fateh999.github.io/react-native-paper-dropdown](https://fateh999.github.io/react-native-paper-dropdown)
+
 ## Demo
 
 ![Android](https://imgur.com/bsAAVMI.png)
