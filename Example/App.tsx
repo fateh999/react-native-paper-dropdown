@@ -1,4 +1,10 @@
-import {Appbar, Provider, TextInput} from 'react-native-paper';
+import {
+  Appbar,
+  DarkTheme,
+  Provider,
+  Surface,
+  TextInput,
+} from 'react-native-paper';
 import React, {Dispatch, SetStateAction, useState} from 'react';
 import {SafeAreaView, StatusBar, StyleSheet} from 'react-native';
 import DropDown from 'react-native-paper-dropdown';
@@ -25,26 +31,28 @@ function App() {
   ];
 
   return (
-    <Provider>
+    <Provider theme={DarkTheme}>
       <StatusBar barStyle={'light-content'} />
       <Appbar.Header>
         <Appbar.Content title={'DropDown Demo'} />
       </Appbar.Header>
-      <SafeAreaView style={styles.containerStyle}>
-        <DropDown
-          label={'Gender'}
-          mode={'outlined'}
-          visible={showDropDown}
-          showDropDown={() => setShowDropDown(true)}
-          onDismiss={() => setShowDropDown(false)}
-          value={gender}
-          setValue={setGender}
-          list={genderList}
-          inputProps={{
-            right: <TextInput.Icon name={'menu-down'} />,
-          }}
-        />
-      </SafeAreaView>
+      <Surface style={styles.containerStyle}>
+        <SafeAreaView style={styles.safeContainerStyle}>
+          <DropDown
+            label={'Gender'}
+            mode={'outlined'}
+            visible={showDropDown}
+            showDropDown={() => setShowDropDown(true)}
+            onDismiss={() => setShowDropDown(false)}
+            value={gender}
+            setValue={setGender}
+            list={genderList}
+            inputProps={{
+              right: <TextInput.Icon name={'menu-down'} />,
+            }}
+          />
+        </SafeAreaView>
+      </Surface>
     </Provider>
   );
 }
@@ -52,7 +60,10 @@ function App() {
 const styles = StyleSheet.create({
   containerStyle: {
     flex: 1,
-    margin: 20,
+  },
+  safeContainerStyle: {
+    flex: 1,
+    padding: 20,
     justifyContent: 'center',
   },
 });
