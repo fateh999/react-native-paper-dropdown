@@ -36,3 +36,6 @@ npm i react-native-paper-dropdown
 ![Android](https://imgur.com/bsAAVMI.png)
 
 ![iOS](https://i.imgur.com/yRBnR80.png)
+
+
+<p><a href="https://www.buymeacoffee.com/fateh999"> <img align="left" src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" height="50" width="210" alt="fateh999" /></a></p><br><br><br>
