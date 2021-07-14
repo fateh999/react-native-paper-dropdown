@@ -37,6 +37,7 @@ export interface DropDownPropsInterface {
   dropDownItemSelectedStyle?: ViewStyle;
   dropDownItemStyle?: ViewStyle;
   dropDownItemTextStyle?: TextStyle;
+  accessibilityLabel?: string;
 }
 
 type TextInputPropsWithoutTheme = Without<TextInputProps, "theme">;
@@ -64,6 +65,7 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
       dropDownItemSelectedStyle,
       dropDownItemTextStyle,
       dropDownItemSelectedTextStyle,
+      accessibilityLabel,
     } = props;
     const [displayValue, setDisplayValue] = useState("");
     const [inputLayout, setInputLayout] = useState({
@@ -90,7 +92,7 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
         onDismiss={onDismiss}
         theme={theme}
         anchor={
-          <TouchableRipple ref={ref} onPress={showDropDown} onLayout={onLayout}>
+          <TouchableRipple ref={ref} onPress={showDropDown} onLayout={onLayout} accessibilityLabel={accessibilityLabel}>
             <View pointerEvents={"none"}>
               <TextInput
                 value={displayValue}
@@ -125,6 +127,7 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
           {list.map((_item, _index) => (
             <Menu.Item
               key={_index}
+              accessibilityLabel={`${accessibilityLabel} option ${_index}`}
               titleStyle={{
                 color:
                   value === _item.value
