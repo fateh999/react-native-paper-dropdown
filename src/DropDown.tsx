@@ -6,8 +6,22 @@ import {
   View,
   ViewStyle,
 } from "react-native";
-import { Menu, TextInput, TouchableRipple, useTheme } from "react-native-paper";
-import React, { ReactNode, forwardRef, useEffect, useState } from "react";
+import {
+  Checkbox,
+  Divider,
+  Menu,
+  TextInput,
+  TouchableRipple,
+  useTheme,
+} from "react-native-paper";
+import React, {
+  ReactNode,
+  forwardRef,
+  useEffect,
+  useState,
+  useCallback,
+  Fragment,
+} from "react";
 import { Theme } from "react-native-paper/lib/typescript/types";
 import { TextInputProps } from "react-native-paper/lib/typescript/components/TextInput/TextInput";
 
@@ -15,10 +29,11 @@ type Without<T, K> = Pick<T, Exclude<keyof T, K>>;
 
 export interface DropDownPropsInterface {
   visible: boolean;
+  multiSelect?: boolean;
   onDismiss: () => void;
   showDropDown: () => void;
-  value: string | number | undefined;
-  setValue: (_value: string | number) => void;
+  value: any;
+  setValue: (_value: any) => void;
   label?: string | undefined;
   placeholder?: string | undefined;
   mode?: "outlined" | "flat" | undefined;
@@ -45,6 +60,7 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
   (props, ref) => {
     const activeTheme = useTheme();
     const {
+      multiSelect = false,
       visible,
       onDismiss,
       showDropDown,
@@ -78,11 +94,49 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
     };
 
     useEffect(() => {
-      const _label = list.find((_) => _.value === value)?.label;
-      if (_label) {
-        setDisplayValue(_label);
+      if (multiSelect) {
+        const _labels = list
+          .filter((_) => value.indexOf(_.value) !== -1)
+          .map((_) => _.label)
+          .join(", ");
+        setDisplayValue(_labels);
+      } else {
+        const _label = list.find((_) => _.value === value)?.label;
+        if (_label) {
+          setDisplayValue(_label);
+        }
       }
     }, [list, value]);
+
+    const isActive = useCallback(
+      (currentValue: any) => {
+        if (multiSelect) {
+          return value.indexOf(currentValue) !== -1;
+        } else {
+          return value === currentValue;
+        }
+      },
+      [value]
+    );
+
+    const setActive = useCallback(
+      (currentValue: any) => {
+        if (multiSelect) {
+          const valueIndex = value.indexOf(currentValue);
+          const values = value.split(",");
+          if (valueIndex === -1) {
+            setValue([...values, currentValue].join(","));
+          } else {
+            setValue(
+              [...values].filter((value) => value !== currentValue).join(",")
+            );
+          }
+        } else {
+          setValue(currentValue);
+        }
+      },
+      [value]
+    );
 
     return (
       <Menu
@@ -99,6 +153,9 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
                 placeholder={placeholder}
                 pointerEvents={"none"}
                 theme={theme}
+                right={
+                  <TextInput.Icon name={visible ? "menu-up" : "menu-down"} />
+                }
                 {...inputProps}
               />
             </View>
@@ -112,6 +169,7 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
         }}
       >
         <ScrollView
+          bounces={false}
           style={{
             ...(dropDownContainerHeight
               ? {
@@ -123,31 +181,51 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
           }}
         >
           {list.map((_item, _index) => (
-            <Menu.Item
-              key={_index}
-              titleStyle={{
-                color:
-                  value === _item.value
-                    ? activeColor || (theme || activeTheme).colors.primary
-                    : (theme || activeTheme).colors.text,
-                ...(value === _item.value
-                  ? dropDownItemSelectedTextStyle
-                  : dropDownItemTextStyle),
-              }}
-              onPress={() => {
-                setValue(_item.value);
-                if (onDismiss) {
-                  onDismiss();
-                }
-              }}
-              title={_item.custom || _item.label}
-              style={{
-                maxWidth: inputLayout?.width,
-                ...(value === _item.value
-                  ? dropDownItemSelectedStyle
-                  : dropDownItemStyle),
-              }}
-            />
+            <Fragment key={_item.value}>
+              <TouchableRipple
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                }}
+                onPress={() => {
+                  setActive(_item.value);
+                  if (onDismiss) {
+                    onDismiss();
+                  }
+                }}
+              >
+                <Fragment>
+                  <Menu.Item
+                    titleStyle={{
+                      color: isActive(_item.value)
+                        ? activeColor || (theme || activeTheme).colors.primary
+                        : (theme || activeTheme).colors.text,
+                      ...(isActive(_item.value)
+                        ? dropDownItemSelectedTextStyle
+                        : dropDownItemTextStyle),
+                    }}
+                    title={_item.custom || _item.label}
+                    style={{
+                      flex: 1,
+                      maxWidth: inputLayout?.width,
+                      ...(isActive(_item.value)
+                        ? dropDownItemSelectedStyle
+                        : dropDownItemStyle),
+                    }}
+                  />
+                  {multiSelect && (
+                    <Checkbox.Android
+                      theme={{
+                        colors: { accent: activeTheme?.colors.primary },
+                      }}
+                      status={isActive(_item.value) ? "checked" : "unchecked"}
+                      onPress={() => setActive(_item.value)}
+                    />
+                  )}
+                </Fragment>
+              </TouchableRipple>
+              <Divider />
+            </Fragment>
           ))}
         </ScrollView>
       </Menu>

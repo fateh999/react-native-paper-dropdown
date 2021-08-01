@@ -4,20 +4,18 @@ import {
   DefaultTheme,
   Provider,
   Surface,
-  TextInput,
   ThemeProvider,
 } from 'react-native-paper';
-import React, {Dispatch, SetStateAction, useState} from 'react';
-import {SafeAreaView, StatusBar, StyleSheet} from 'react-native';
+import React, {useState} from 'react';
+import {SafeAreaView, StatusBar, StyleSheet, View} from 'react-native';
 import DropDown from 'react-native-paper-dropdown';
 
 function App() {
   const [nightMode, setNightmode] = useState(false);
   const [showDropDown, setShowDropDown] = useState(false);
-  const [gender, setGender]: [
-    string | number | undefined,
-    Dispatch<SetStateAction<string | number | undefined>>,
-  ] = useState();
+  const [gender, setGender] = useState<string>('');
+  const [showMultiSelectDropDown, setShowMultiSelectDropDown] = useState(false);
+  const [colors, setColors] = useState<string>('');
   const genderList = [
     {
       label: 'Male',
@@ -30,6 +28,28 @@ function App() {
     {
       label: 'Others',
       value: 'others',
+    },
+  ];
+  const colorList = [
+    {
+      label: 'White',
+      value: 'white',
+    },
+    {
+      label: 'Red',
+      value: 'red',
+    },
+    {
+      label: 'Blue',
+      value: 'blue',
+    },
+    {
+      label: 'Green',
+      value: 'green',
+    },
+    {
+      label: 'Orange',
+      value: 'orange',
     },
   ];
 
@@ -60,9 +80,18 @@ function App() {
               value={gender}
               setValue={setGender}
               list={genderList}
-              inputProps={{
-                right: <TextInput.Icon name={'menu-down'} />,
-              }}
+            />
+            <View style={styles.spacerStyle} />
+            <DropDown
+              label={'Colors'}
+              mode={'outlined'}
+              visible={showMultiSelectDropDown}
+              showDropDown={() => setShowMultiSelectDropDown(true)}
+              onDismiss={() => setShowMultiSelectDropDown(false)}
+              value={colors}
+              setValue={setColors}
+              list={colorList}
+              multiSelect
             />
           </SafeAreaView>
         </Surface>
@@ -75,9 +104,12 @@ const styles = StyleSheet.create({
   containerStyle: {
     flex: 1,
   },
+  spacerStyle: {
+    marginBottom: 15,
+  },
   safeContainerStyle: {
     flex: 1,
-    padding: 20,
+    margin: 20,
     justifyContent: 'center',
   },
 });
