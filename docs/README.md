@@ -151,7 +151,7 @@ export default App;
 
 ## Demo
 
-<!-- ![Android](https://imgur.com/bsAAVMI.png) -->
+![Demo](https://github.com/fateh999/react-native-paper-dropdown/blob/master/Demo.gif)
 
 ## Props
 
