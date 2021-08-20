@@ -218,6 +218,11 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
                       ...(isActive(_item.value)
                         ? dropDownItemSelectedStyle
                         : dropDownItemStyle),
+                    }} onPress={() => {
+                      setActive(_item.value);
+                      if (onDismiss) {
+                        onDismiss();
+                      }
                     }}
                   />
                   {multiSelect && (
