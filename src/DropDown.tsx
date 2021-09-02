@@ -137,7 +137,7 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
           setValue(currentValue);
         }
       },
-      [value]
+      [value, setValue]
     );
 
     return (
@@ -180,11 +180,11 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
           style={{
             ...(dropDownContainerHeight
               ? {
-                  height: dropDownContainerHeight,
-                }
+                height: dropDownContainerHeight,
+              }
               : {
-                  maxHeight: dropDownContainerMaxHeight || 200,
-                }),
+                maxHeight: dropDownContainerMaxHeight || 200,
+              }),
           }}
         >
           {list.map((_item, _index) => (
