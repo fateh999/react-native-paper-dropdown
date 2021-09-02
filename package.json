@@ -32,11 +32,11 @@
     "registry": "https://registry.npmjs.org/"
   },
   "peerDependencies": {
+    "@types/react": "*",
+    "@types/react-native": "*",
     "react": "*",
     "react-native": "*",
     "react-native-paper": "*",
-    "@types/react": "*",
-    "@types/react-native": "*",
     "typescript": "*"
   }
 }
