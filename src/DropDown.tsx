@@ -98,7 +98,7 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
     useEffect(() => {
       if (multiSelect) {
         const _labels = list
-          .filter((_) => value.indexOf(_.value) !== -1)
+          .filter((_) => isActive(_.value))
           .map((_) => _.label)
           .join(", ");
         setDisplayValue(_labels);
@@ -113,7 +113,7 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
     const isActive = useCallback(
       (currentValue: any) => {
         if (multiSelect) {
-          return value.indexOf(currentValue) !== -1;
+          return value.split(",").indexOf(currentValue) !== -1;
         } else {
           return value === currentValue;
         }
@@ -124,8 +124,8 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
     const setActive = useCallback(
       (currentValue: any) => {
         if (multiSelect) {
-          const valueIndex = value.indexOf(currentValue);
           const values = value.split(",");
+          const valueIndex = values.indexOf(currentValue);
           if (valueIndex === -1) {
             setValue([...values, currentValue].join(","));
           } else {
