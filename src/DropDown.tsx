@@ -40,7 +40,7 @@ export interface DropDownPropsInterface {
   inputProps?: TextInputPropsWithoutTheme;
   list: Array<{
     label: string;
-    value: string | number;
+    value: string | boolean | number;
     [key: string]: string | boolean | number;
     custom?: ReactNode;
   }>;
