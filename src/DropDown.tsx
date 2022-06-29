@@ -41,6 +41,7 @@ export interface DropDownPropsInterface {
   list: Array<{
     label: string;
     value: string | number;
+    [key: string]: string | boolean | number;
     custom?: ReactNode;
   }>;
   dropDownContainerMaxHeight?: number;
