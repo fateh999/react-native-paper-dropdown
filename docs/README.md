@@ -157,29 +157,30 @@ export default App;
 
 ```typescript
 {
-    visible: boolean;
-    multiSelect?: boolean;
-    onDismiss: () => void;
-    showDropDown: () => void;
-    value: any;
-    setValue: (_value: any) => void;
-    label?: string | undefined;
-    placeholder?: string | undefined;
-    mode?: "outlined" | "flat" | undefined;
+    activeColor?: string;
+    disabled?: boolean;
+    dropDownContainerHeight?: number;
+    dropDownContainerMaxHeight?: number;
+    dropDownItemSelectedStyle?: ViewStyle;
+    dropDownItemSelectedTextStyle?: TextStyle;
+    dropDownItemStyle?: ViewStyle;
+    dropDownItemTextStyle?: TextStyle;
+    dropDownStyle?: ViewStyle;
     inputProps?: TextInputPropsWithoutTheme;
+    label?: string | undefined;
     list: Array<{
         label: string;
         value: string | number;
         custom?: ReactNode;
     }>;
-    dropDownContainerMaxHeight?: number;
-    dropDownContainerHeight?: number;
-    activeColor?: string;
+    mode?: "outlined" | "flat" | undefined;
+    multiSelect?: boolean;
+    onDismiss: () => void;
+    placeholder?: string | undefined;
+    setValue: (_value: any) => void;
+    showDropDown: () => void;
     theme?: Theme;
-    dropDownStyle?: ViewStyle;
-    dropDownItemSelectedTextStyle?: TextStyle;
-    dropDownItemSelectedStyle?: ViewStyle;
-    dropDownItemStyle?: ViewStyle;
-    dropDownItemTextStyle?: TextStyle;
+    value: any;
+    visible: boolean;
 }
 ```

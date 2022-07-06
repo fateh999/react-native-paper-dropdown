@@ -61,27 +61,28 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
   (props, ref) => {
     const activeTheme = useTheme();
     const {
-      multiSelect = false,
-      visible,
-      onDismiss,
-      showDropDown,
-      value,
-      setValue,
-      activeColor,
-      mode,
-      label,
-      placeholder,
-      inputProps,
-      list,
-      dropDownContainerMaxHeight,
-      dropDownContainerHeight,
-      theme,
-      dropDownStyle,
-      dropDownItemStyle,
-      dropDownItemSelectedStyle,
-      dropDownItemTextStyle,
-      dropDownItemSelectedTextStyle,
       accessibilityLabel,
+      activeColor,
+      disabled = false,
+      dropDownContainerHeight,
+      dropDownContainerMaxHeight,
+      dropDownItemSelectedStyle,
+      dropDownItemSelectedTextStyle,
+      dropDownItemStyle,
+      dropDownItemTextStyle,
+      dropDownStyle,
+      inputProps,
+      label,
+      list,
+      mode,
+      multiSelect = false,
+      onDismiss,
+      placeholder,
+      setValue,
+      showDropDown,
+      theme,
+      value,
+      visible,
     } = props;
     const [displayValue, setDisplayValue] = useState("");
     const [inputLayout, setInputLayout] = useState({
@@ -163,6 +164,7 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
                 right={
                   <TextInput.Icon name={visible ? "menu-up" : "menu-down"} />
                 }
+                disabled={disabled}
                 {...inputProps}
               />
             </View>
