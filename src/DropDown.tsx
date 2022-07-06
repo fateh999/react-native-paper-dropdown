@@ -28,31 +28,32 @@ import { TextInputProps } from "react-native-paper/lib/typescript/components/Tex
 type Without<T, K> = Pick<T, Exclude<keyof T, K>>;
 
 export interface DropDownPropsInterface {
-  visible: boolean;
-  multiSelect?: boolean;
-  onDismiss: () => void;
-  showDropDown: () => void;
-  value: any;
-  setValue: (_value: any) => void;
-  label?: string | undefined;
-  placeholder?: string | undefined;
-  mode?: "outlined" | "flat" | undefined;
+  accessibilityLabel?: string;
+  activeColor?: string;
+  disabled?: boolean;
+  dropDownContainerHeight?: number;
+  dropDownContainerMaxHeight?: number;
+  dropDownItemSelectedStyle?: ViewStyle;
+  dropDownItemSelectedTextStyle?: TextStyle;
+  dropDownItemStyle?: ViewStyle;
+  dropDownItemTextStyle?: TextStyle;
+  dropDownStyle?: ViewStyle;
   inputProps?: TextInputPropsWithoutTheme;
+  label?: string | undefined;
   list: Array<{
     label: string;
     value: string | number;
     custom?: ReactNode;
   }>;
-  dropDownContainerMaxHeight?: number;
-  dropDownContainerHeight?: number;
-  activeColor?: string;
+  mode?: "outlined" | "flat" | undefined;
+  multiSelect?: boolean;
+  onDismiss: () => void;
+  placeholder?: string | undefined;
+  setValue: (_value: any) => void;
+  showDropDown: () => void;
   theme?: Theme;
-  dropDownStyle?: ViewStyle;
-  dropDownItemSelectedTextStyle?: TextStyle;
-  dropDownItemSelectedStyle?: ViewStyle;
-  dropDownItemStyle?: ViewStyle;
-  dropDownItemTextStyle?: TextStyle;
-  accessibilityLabel?: string;
+  value: any;
+  visible: boolean;
 }
 
 type TextInputPropsWithoutTheme = Without<TextInputProps, "theme">;
@@ -61,27 +62,28 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
   (props, ref) => {
     const activeTheme = useTheme();
     const {
-      multiSelect = false,
-      visible,
-      onDismiss,
-      showDropDown,
-      value,
-      setValue,
-      activeColor,
-      mode,
-      label,
-      placeholder,
-      inputProps,
-      list,
-      dropDownContainerMaxHeight,
-      dropDownContainerHeight,
-      theme,
-      dropDownStyle,
-      dropDownItemStyle,
-      dropDownItemSelectedStyle,
-      dropDownItemTextStyle,
-      dropDownItemSelectedTextStyle,
       accessibilityLabel,
+      activeColor,
+      disabled = false,
+      dropDownContainerHeight,
+      dropDownContainerMaxHeight,
+      dropDownItemSelectedStyle,
+      dropDownItemSelectedTextStyle,
+      dropDownItemStyle,
+      dropDownItemTextStyle,
+      dropDownStyle,
+      inputProps,
+      label,
+      list,
+      mode,
+      multiSelect = false,
+      onDismiss,
+      placeholder,
+      setValue,
+      showDropDown,
+      theme,
+      value,
+      visible,
     } = props;
     const [displayValue, setDisplayValue] = useState("");
     const [inputLayout, setInputLayout] = useState({
@@ -142,7 +144,7 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
 
     return (
       <Menu
-        visible={visible}
+        visible={visible && !disabled}
         onDismiss={onDismiss}
         theme={theme}
         anchor={
@@ -163,6 +165,7 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
                 right={
                   <TextInput.Icon name={visible ? "menu-up" : "menu-down"} />
                 }
+                disabled={disabled}
                 {...inputProps}
               />
             </View>
