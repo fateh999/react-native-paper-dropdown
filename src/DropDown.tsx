@@ -27,8 +27,11 @@ import { TextInputProps } from "react-native-paper/lib/typescript/components/Tex
 
 type Without<T, K> = Pick<T, Exclude<keyof T, K>>;
 
+type Value = string | number | boolean | undefined;
+
 export interface DropDownPropsInterface {
   visible: boolean;
+  defaultValue?: Value;
   multiSelect?: boolean;
   onDismiss: () => void;
   showDropDown: () => void;
@@ -40,7 +43,7 @@ export interface DropDownPropsInterface {
   inputProps?: TextInputPropsWithoutTheme;
   list: Array<{
     label: string;
-    value: string | number;
+    value: Value;
     custom?: ReactNode;
   }>;
   dropDownContainerMaxHeight?: number;
@@ -63,6 +66,7 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
     const {
       multiSelect = false,
       visible,
+      defaultValue,
       onDismiss,
       showDropDown,
       value,
@@ -94,6 +98,10 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
     const onLayout = (event: LayoutChangeEvent) => {
       setInputLayout(event.nativeEvent.layout);
     };
+
+    useEffect(() => {
+      if(defaultValue) setDisplayValue(defaultValue);
+    }, []);
 
     useEffect(() => {
       if (multiSelect) {

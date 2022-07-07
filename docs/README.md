@@ -158,6 +158,7 @@ export default App;
 ```typescript
 {
     visible: boolean;
+    defaultValue?: string | number | boolean | undefined;
     multiSelect?: boolean;
     onDismiss: () => void;
     showDropDown: () => void;
@@ -169,7 +170,7 @@ export default App;
     inputProps?: TextInputPropsWithoutTheme;
     list: Array<{
         label: string;
-        value: string | number;
+        value: string | number | boolean | undefined;
         custom?: ReactNode;
     }>;
     dropDownContainerMaxHeight?: number;
