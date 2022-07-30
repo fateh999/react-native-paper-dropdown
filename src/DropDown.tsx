@@ -38,6 +38,7 @@ export interface DropDownPropsInterface {
   placeholder?: string | undefined;
   mode?: "outlined" | "flat" | undefined;
   inputProps?: TextInputPropsWithoutTheme;
+  rippleColor?: string | undefined;
   list: Array<{
     label: string;
     value: string | number;
@@ -72,6 +73,7 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
       label,
       placeholder,
       inputProps,
+      rippleColor,
       list,
       dropDownContainerMaxHeight,
       dropDownContainerHeight,
@@ -150,6 +152,7 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
             ref={ref}
             onPress={showDropDown}
             onLayout={onLayout}
+            rippleColor={rippleColor}
             accessibilityLabel={accessibilityLabel}
           >
             <View pointerEvents={"none"}>
