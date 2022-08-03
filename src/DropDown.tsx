@@ -106,6 +106,8 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
         const _label = list.find((_) => _.value === value)?.label;
         if (_label) {
           setDisplayValue(_label);
+        }else{
+          setDisplayValue("");
         }
       }
     }, [list, value]);
