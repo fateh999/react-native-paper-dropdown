@@ -222,7 +222,7 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
                     }}
                     title={
                       <View style={styles.labelContainer}>
-                          <View style={{flex:2, justifyContent:!!props.subtext ? 'flex-end':'center'}}>
+                          <View style={{flex:2, justifyContent:!!props.subtitle ? 'flex-end':'center'}}>
                               <Text style={styles.title}>{_item.custom || _item.label}</Text>
                           </View>
                           {props.subtitle && 
