@@ -37,6 +37,7 @@ export interface DropDownPropsInterface {
   label?: string | undefined;
   placeholder?: string | undefined;
   mode?: "outlined" | "flat" | undefined;
+  style?: ViewStyle;
   inputProps?: TextInputPropsWithoutTheme;
   list: Array<{
     label: string;
@@ -82,6 +83,7 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
       dropDownItemTextStyle,
       dropDownItemSelectedTextStyle,
       accessibilityLabel,
+      style
     } = props;
     const [displayValue, setDisplayValue] = useState("");
     const [inputLayout, setInputLayout] = useState({
@@ -156,6 +158,7 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
               <TextInput
                 value={displayValue}
                 mode={mode}
+                style={style}
                 label={label}
                 placeholder={placeholder}
                 pointerEvents={"none"}
