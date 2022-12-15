@@ -137,7 +137,7 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
           setValue(currentValue);
         }
       },
-      [value]
+      [value, setValue]
     );
 
     return (
