@@ -174,6 +174,7 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
           marginTop: inputLayout?.height,
           ...dropDownStyle,
         }}
+        contentStyle={dropDownStyle}
       >
         <ScrollView
           bounces={false}
