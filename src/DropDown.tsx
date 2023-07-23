@@ -83,7 +83,7 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
       dropDownItemSelectedTextStyle,
       accessibilityLabel,
     } = props;
-    const [displayValue, setDisplayValue] = useState("");
+    const [displayValue, setDisplayValue] = useState(value);
     const [inputLayout, setInputLayout] = useState({
       height: 0,
       width: 0,
