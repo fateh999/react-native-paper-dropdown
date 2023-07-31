@@ -1,6 +1,6 @@
 import {
   LayoutChangeEvent,
-  ScrollView,
+  FlatList,
   TextStyle,
   TouchableWithoutFeedback,
   View,
@@ -140,6 +140,57 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
       [value]
     );
 
+    const renderItem = useCallback(
+      ({ item }) => (
+        <Fragment key={item.value}>
+          <TouchableRipple
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+            onPress={() => {
+              setActive(item.value);
+              if (onDismiss) {
+                onDismiss();
+              }
+            }}
+          >
+            <Fragment>
+              <Menu.Item
+                titleStyle={{
+                  color: isActive(item.value)
+                    ? activeColor || (theme || activeTheme).colors.primary
+                    : (theme || activeTheme).colors.text,
+                  ...(isActive(item.value)
+                    ? dropDownItemSelectedTextStyle
+                    : dropDownItemTextStyle),
+                }}
+                title={item.custom || item.label}
+                style={{
+                  flex: 1,
+                  maxWidth: inputLayout?.width,
+                  ...(isActive(item.value)
+                    ? dropDownItemSelectedStyle
+                    : dropDownItemStyle),
+                }}
+              />
+              {multiSelect && (
+                <Checkbox.Android
+                  theme={{
+                    colors: { accent: activeTheme?.colors.primary },
+                  }}
+                  status={isActive(item.value) ? "checked" : "unchecked"}
+                  onPress={() => setActive(item.value)}
+                />
+              )}
+            </Fragment>
+          </TouchableRipple>
+          <Divider />
+        </Fragment>
+      ),
+      []
+    );
+
     return (
       <Menu
         visible={visible}
@@ -175,7 +226,7 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
           ...dropDownStyle,
         }}
       >
-        <ScrollView
+        <FlatList
           bounces={false}
           style={{
             ...(dropDownContainerHeight
@@ -186,55 +237,10 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
                   maxHeight: dropDownContainerMaxHeight || 200,
                 }),
           }}
-        >
-          {list.map((_item, _index) => (
-            <Fragment key={_item.value}>
-              <TouchableRipple
-                style={{
-                  flexDirection: "row",
-                  alignItems: "center",
-                }}
-                onPress={() => {
-                  setActive(_item.value);
-                  if (onDismiss) {
-                    onDismiss();
-                  }
-                }}
-              >
-                <Fragment>
-                  <Menu.Item
-                    titleStyle={{
-                      color: isActive(_item.value)
-                        ? activeColor || (theme || activeTheme).colors.primary
-                        : (theme || activeTheme).colors.text,
-                      ...(isActive(_item.value)
-                        ? dropDownItemSelectedTextStyle
-                        : dropDownItemTextStyle),
-                    }}
-                    title={_item.custom || _item.label}
-                    style={{
-                      flex: 1,
-                      maxWidth: inputLayout?.width,
-                      ...(isActive(_item.value)
-                        ? dropDownItemSelectedStyle
-                        : dropDownItemStyle),
-                    }}
-                  />
-                  {multiSelect && (
-                    <Checkbox.Android
-                      theme={{
-                        colors: { accent: activeTheme?.colors.primary },
-                      }}
-                      status={isActive(_item.value) ? "checked" : "unchecked"}
-                      onPress={() => setActive(_item.value)}
-                    />
-                  )}
-                </Fragment>
-              </TouchableRipple>
-              <Divider />
-            </Fragment>
-          ))}
-        </ScrollView>
+          data={list}
+          keyExtractor={(item) => item.value.toString()}
+          renderItem={renderItem}
+        />
       </Menu>
     );
   }
