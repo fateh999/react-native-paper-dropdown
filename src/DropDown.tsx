@@ -53,6 +53,7 @@ export interface DropDownPropsInterface {
   dropDownItemStyle?: ViewStyle;
   dropDownItemTextStyle?: TextStyle;
   accessibilityLabel?: string;
+  keyboardShouldPersistTaps?: 'never' | 'always' | 'handled' | undefined;
 }
 
 type TextInputPropsWithoutTheme = Without<TextInputProps, "theme">;
@@ -82,6 +83,7 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
       dropDownItemTextStyle,
       dropDownItemSelectedTextStyle,
       accessibilityLabel,
+      keyboardShouldPersistTaps,
     } = props;
     const [displayValue, setDisplayValue] = useState("");
     const [inputLayout, setInputLayout] = useState({
@@ -177,6 +179,7 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
       >
         <ScrollView
           bounces={false}
+          keyboardShouldPersistTaps={keyboardShouldPersistTaps}
           style={{
             ...(dropDownContainerHeight
               ? {
