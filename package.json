@@ -8,6 +8,7 @@
   "main": "dist/DropDown.js",
   "types": "dist/DropDown.d.ts",
   "scripts": {
+    "preinstall": "npm run build",
     "build": "tsc"
   },
   "repository": {
