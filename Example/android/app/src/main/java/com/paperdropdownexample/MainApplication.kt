@@ -1,4 +1,4 @@
-package com.example.dropdown
+package com.paperdropdownexample
 
 import android.app.Application
 import com.facebook.react.PackageList
