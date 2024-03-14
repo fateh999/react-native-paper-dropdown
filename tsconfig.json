@@ -1,21 +1,28 @@
 {
   "compilerOptions": {
-    "lib": ["es6"],
-    "declaration": true,
-    "declarationDir": "./dist",
-    "strict": true,
-    "allowSyntheticDefaultImports": true,
-    "sourceMap": false,
-    "noUnusedParameters": true,
-    "strictNullChecks": true,
+    "rootDir": ".",
+    "paths": {
+      "react-native-paper-dropdown": ["./src/index"]
+    },
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "jsx": "react",
+    "lib": ["esnext"],
+    "module": "esnext",
     "moduleResolution": "node",
-    "noImplicitAny": true,
-    "outDir": "./dist",
-    "target": "esnext",
-    "jsx": "react-native",
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "noImplicitUseStrict": false,
+    "noStrictGenericChecks": false,
+    "noUncheckedIndexedAccess": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "resolveJsonModule": true,
     "skipLibCheck": true,
-    "typeRoots": ["node_modules/@types"]
-  },
-  "include": ["./src/DropDown.tsx"],
-  "exclude": ["./node_modules", "./Example"]
+    "strict": true,
+    "target": "esnext",
+    "verbatimModuleSyntax": true
+  }
 }
