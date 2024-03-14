@@ -22,8 +22,8 @@ import {
   TouchableRipple,
   useTheme,
   type TextInputProps,
+  type MD3Theme,
 } from "react-native-paper";
-import type { ThemeProp } from "react-native-paper/lib/typescript/types";
 
 type Without<T, K> = Pick<T, Exclude<keyof T, K>>;
 
@@ -46,7 +46,7 @@ export interface DropDownPropsInterface {
   dropDownContainerMaxHeight?: number;
   dropDownContainerHeight?: number;
   activeColor?: string;
-  theme?: ThemeProp;
+  theme?: MD3Theme;
   dropDownStyle?: ViewStyle;
   dropDownItemSelectedTextStyle?: TextStyle;
   dropDownItemSelectedStyle?: ViewStyle;
@@ -59,7 +59,6 @@ type TextInputPropsWithoutTheme = Without<TextInputProps, "theme">;
 
 const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
   (props, ref) => {
-    const activeTheme = useTheme();
     const {
       multiSelect = false,
       visible,
@@ -75,7 +74,7 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
       list,
       dropDownContainerMaxHeight,
       dropDownContainerHeight,
-      theme,
+      theme = useTheme(),
       dropDownStyle,
       dropDownItemStyle,
       dropDownItemSelectedStyle,
@@ -147,7 +146,7 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
         theme={theme}
         anchor={
           <TouchableRipple
-            ref={ref}
+            ref={ref as any}
             onPress={showDropDown}
             onLayout={onLayout}
             accessibilityLabel={accessibilityLabel}
@@ -205,8 +204,8 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
                   <Menu.Item
                     titleStyle={{
                       color: isActive(_item.value)
-                        ? activeColor || (theme || activeTheme).colors.primary
-                        : (theme || activeTheme).colors.text,
+                        ? activeColor || theme?.colors.primary
+                        : theme?.colors.onBackground,
                       ...(isActive(_item.value)
                         ? dropDownItemSelectedTextStyle
                         : dropDownItemTextStyle),
@@ -223,7 +222,7 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
                   {multiSelect && (
                     <Checkbox.Android
                       theme={{
-                        colors: { accent: activeTheme?.colors.primary },
+                        colors: { accent: theme?.colors.primary },
                       }}
                       status={isActive(_item.value) ? "checked" : "unchecked"}
                       onPress={() => setActive(_item.value)}
