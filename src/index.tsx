@@ -1,10 +1,18 @@
+import React, {
+  type ReactNode,
+  forwardRef,
+  useEffect,
+  useState,
+  useCallback,
+  Fragment,
+} from "react";
 import {
-  LayoutChangeEvent,
+  type LayoutChangeEvent,
   ScrollView,
-  TextStyle,
+  type TextStyle,
   TouchableWithoutFeedback,
   View,
-  ViewStyle,
+  type ViewStyle,
 } from "react-native";
 import {
   Checkbox,
@@ -13,17 +21,9 @@ import {
   TextInput,
   TouchableRipple,
   useTheme,
+  type TextInputProps,
 } from "react-native-paper";
-import React, {
-  ReactNode,
-  forwardRef,
-  useEffect,
-  useState,
-  useCallback,
-  Fragment,
-} from "react";
-import { Theme } from "react-native-paper/lib/typescript/types";
-import { TextInputProps } from "react-native-paper/lib/typescript/components/TextInput/TextInput";
+import type { ThemeProp } from "react-native-paper/lib/typescript/types";
 
 type Without<T, K> = Pick<T, Exclude<keyof T, K>>;
 
@@ -46,7 +46,7 @@ export interface DropDownPropsInterface {
   dropDownContainerMaxHeight?: number;
   dropDownContainerHeight?: number;
   activeColor?: string;
-  theme?: Theme;
+  theme?: ThemeProp;
   dropDownStyle?: ViewStyle;
   dropDownItemSelectedTextStyle?: TextStyle;
   dropDownItemSelectedStyle?: ViewStyle;
@@ -161,7 +161,7 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
                 pointerEvents={"none"}
                 theme={theme}
                 right={
-                  <TextInput.Icon name={visible ? "menu-up" : "menu-down"} />
+                  <TextInput.Icon icon={visible ? "menu-up" : "menu-down"} />
                 }
                 {...inputProps}
               />

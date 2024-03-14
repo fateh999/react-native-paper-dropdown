@@ -1,10 +1,10 @@
 import {
   Appbar,
-  DarkTheme,
-  DefaultTheme,
   Provider,
   Surface,
   ThemeProvider,
+  MD3DarkTheme,
+  MD3LightTheme,
 } from 'react-native-paper';
 import React, {useState} from 'react';
 import {SafeAreaView, StatusBar, StyleSheet, View} from 'react-native';
@@ -54,11 +54,11 @@ function App() {
   ];
 
   return (
-    <Provider theme={nightMode ? DarkTheme : DefaultTheme}>
-      <ThemeProvider theme={nightMode ? DarkTheme : DefaultTheme}>
+    <Provider theme={nightMode ? MD3DarkTheme : MD3LightTheme}>
+      <ThemeProvider theme={nightMode ? MD3DarkTheme : MD3LightTheme}>
         <StatusBar
           backgroundColor={
-            nightMode ? DarkTheme.colors.surface : DefaultTheme.colors.primary
+            nightMode ? MD3DarkTheme.colors.surface : MD3LightTheme.colors.primary
           }
           barStyle={'light-content'}
         />
