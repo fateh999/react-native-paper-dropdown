@@ -14,7 +14,6 @@ import {
   View,
   type ViewStyle,
   StyleSheet,
-  KeyboardAvoidingView,
 } from 'react-native';
 import {
   Checkbox,
@@ -176,81 +175,65 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
           ...dropDownStyle,
         }}
       >
-        <KeyboardAvoidingView
-          style={styles.flex1}
-          behavior={'padding'}
-          keyboardVerticalOffset={55}
-          enabled={true}
+        <ScrollView
+          bounces={false}
+          style={{
+            ...(dropDownContainerHeight
+              ? {
+                  height: dropDownContainerHeight,
+                }
+              : {
+                  maxHeight: dropDownContainerMaxHeight || 200,
+                }),
+          }}
         >
-          <ScrollView
-            bounces={false}
-            style={{
-              ...(dropDownContainerHeight
-                ? {
-                    height: dropDownContainerHeight,
+          {list.map((_item, _index) => (
+            <Fragment key={_item.value}>
+              <TouchableRipple
+                style={styles.itemRipple}
+                onPress={() => {
+                  setActive(_item.value);
+                  if (onDismiss) {
+                    onDismiss();
                   }
-                : {
-                    maxHeight: dropDownContainerMaxHeight || 200,
-                  }),
-            }}
-          >
-            <TextInput
-              value={displayValue}
-              mode={mode}
-              label={label}
-              placeholder={`Search ${placeholder}`}
-              theme={theme}
-              right={<TextInput.Icon icon={'magnify'} />}
-              style={styles.wrapSearch}
-            />
-            {list.map((_item, _index) => (
-              <Fragment key={_item.value}>
-                <TouchableRipple
-                  style={styles.itemRipple}
-                  onPress={() => {
-                    setActive(_item.value);
-                    if (onDismiss) {
-                      onDismiss();
-                    }
-                  }}
-                >
-                  <Fragment>
-                    <Menu.Item
-                      titleStyle={{
-                        color: isActive(_item.value)
-                          ? activeColor || theme?.colors.primary
-                          : theme?.colors.onBackground,
+                }}
+              >
+                <Fragment>
+                  <Menu.Item
+                    titleStyle={{
+                      color: isActive(_item.value)
+                        ? activeColor || theme?.colors.primary
+                        : theme?.colors.onBackground,
+                      ...(isActive(_item.value)
+                        ? dropDownItemSelectedTextStyle
+                        : dropDownItemTextStyle),
+                    }}
+                    title={_item.custom || _item.label}
+                    style={[
+                      styles.flex1,
+                      {
+                        maxWidth: inputLayout?.width,
                         ...(isActive(_item.value)
-                          ? dropDownItemSelectedTextStyle
-                          : dropDownItemTextStyle),
+                          ? dropDownItemSelectedStyle
+                          : dropDownItemStyle),
+                      },
+                    ]}
+                  />
+                  {multiSelect && (
+                    <Checkbox.Android
+                      theme={{
+                        colors: { accent: theme?.colors.primary },
                       }}
-                      title={_item.custom || _item.label}
-                      style={[
-                        styles.flex1,
-                        {
-                          maxWidth: inputLayout?.width,
-                          ...(isActive(_item.value)
-                            ? dropDownItemSelectedStyle
-                            : dropDownItemStyle),
-                        },
-                      ]}
+                      status={isActive(_item.value) ? 'checked' : 'unchecked'}
+                      onPress={() => setActive(_item.value)}
                     />
-                    {multiSelect && (
-                      <Checkbox.Android
-                        theme={{
-                          colors: { accent: theme?.colors.primary },
-                        }}
-                        status={isActive(_item.value) ? 'checked' : 'unchecked'}
-                        onPress={() => setActive(_item.value)}
-                      />
-                    )}
-                  </Fragment>
-                </TouchableRipple>
-                <Divider />
-              </Fragment>
-            ))}
-          </ScrollView>
-        </KeyboardAvoidingView>
+                  )}
+                </Fragment>
+              </TouchableRipple>
+              <Divider />
+            </Fragment>
+          ))}
+        </ScrollView>
       </Menu>
     );
   }
