@@ -1,5 +1,12 @@
 import { ForwardRefExoticComponent } from 'react';
-import { DimensionValue, PressableProps, View, ViewStyle } from 'react-native';
+import {
+  DimensionValue,
+  NativeScrollEvent,
+  NativeSyntheticEvent,
+  PressableProps,
+  View,
+  ViewStyle,
+} from 'react-native';
 import { TextInputLabelProp } from 'react-native-paper/lib/typescript/components/TextInput/types';
 import { TextInputProps } from 'react-native-paper';
 
@@ -36,6 +43,9 @@ export type DropdownProps = {
   CustomMenuHeader?: (props: DropdownHeaderProps) => JSX.Element;
   CustomDropdownItem?: (props: DropdownItemProps) => JSX.Element;
   CustomDropdownInput?: (props: DropdownInputProps) => JSX.Element;
+  onScroll?: (event: NativeSyntheticEvent<NativeScrollEvent>) => void;
+  onScrollBeginDrag?: (event: NativeSyntheticEvent<NativeScrollEvent>) => void;
+  onScrollEndDrag?: (event: NativeSyntheticEvent<NativeScrollEvent>) => void;
 } & Pick<
   TextInputProps,
   'placeholder' | 'label' | 'mode' | 'disabled' | 'error'
@@ -61,6 +71,9 @@ export type MultiSelectDropdownProps = {
     props: MultiSelectDropdownItemProps
   ) => JSX.Element;
   CustomMultiSelectDropdownInput?: (props: DropdownInputProps) => JSX.Element;
+  onScroll?: (event: NativeSyntheticEvent<NativeScrollEvent>) => void;
+  onScrollBeginDrag?: (event: NativeSyntheticEvent<NativeScrollEvent>) => void;
+  onScrollEndDrag?: (event: NativeSyntheticEvent<NativeScrollEvent>) => void;
 } & Pick<
   TextInputProps,
   'placeholder' | 'label' | 'mode' | 'disabled' | 'error'

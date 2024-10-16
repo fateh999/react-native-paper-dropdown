@@ -31,6 +31,9 @@ function MultiSelectDropdown(
     disabled = false,
     error = false,
     onSelect,
+    onScroll,
+    onScrollBeginDrag,
+    onScrollEndDrag,
     CustomMultiSelectDropdownItem = MultiSelectDropdownItem,
     CustomMultiSelectDropdownInput = DropdownInput,
     CustomMenuHeader = DropdownHeader,
@@ -109,7 +112,13 @@ function MultiSelectDropdown(
           multiSelect
         />
       )}
-      <ScrollView style={scrollViewStyle} bounces={false}>
+      <ScrollView
+        style={scrollViewStyle}
+        bounces={false}
+        onScroll={onScroll}
+        onScrollBeginDrag={onScrollBeginDrag}
+        onScrollEndDrag={onScrollEndDrag}
+      >
         {options.map((option, index) => {
           return (
             <CustomMultiSelectDropdownItem

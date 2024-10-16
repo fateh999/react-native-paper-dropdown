@@ -28,6 +28,9 @@ function Dropdown(props: DropdownProps, ref: React.Ref<DropdownRef>) {
     disabled = false,
     error = false,
     onSelect,
+    onScroll,
+    onScrollBeginDrag,
+    onScrollEndDrag,
     CustomDropdownItem = DropdownItem,
     CustomDropdownInput = DropdownInput,
     CustomMenuHeader = DropdownHeader,
@@ -99,7 +102,13 @@ function Dropdown(props: DropdownProps, ref: React.Ref<DropdownRef>) {
           multiSelect={false}
         />
       )}
-      <ScrollView style={scrollViewStyle} bounces={false}>
+      <ScrollView
+        style={scrollViewStyle}
+        bounces={false}
+        onScroll={onScroll}
+        onScrollBeginDrag={onScrollBeginDrag}
+        onScrollEndDrag={onScrollEndDrag}
+      >
         {options.map((option, index) => {
           return (
             <CustomDropdownItem
