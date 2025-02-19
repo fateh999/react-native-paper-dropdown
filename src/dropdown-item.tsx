@@ -13,12 +13,12 @@ function DropdownItem(props: DropdownItemProps) {
       color:
         value === option.value
           ? theme.colors.primary
-          : theme.colors.onBackground,
+          : theme.colors.onSurface,
       width: width,
     }),
     [
       option.value,
-      theme.colors.onBackground,
+      theme.colors.onSurface,
       theme.colors.primary,
       value,
       width,
