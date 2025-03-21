@@ -27,6 +27,7 @@ export type DropdownProps = {
   menuDownIcon?: JSX.Element;
   maxMenuHeight?: number;
   menuContentStyle?: ViewStyle;
+  scrollViewStyle?: ViewStyle;
   hideMenuHeader?: boolean;
   statusBarHeight?: number;
   Touchable?: ForwardRefExoticComponent<

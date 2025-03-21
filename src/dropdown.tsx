@@ -20,6 +20,7 @@ function Dropdown(props: DropdownProps, ref: React.Ref<DropdownRef>) {
     value,
     maxMenuHeight,
     menuContentStyle,
+    scrollViewStyle,
     statusBarHeight = Platform.OS === 'android'
       ? StatusBar.currentHeight
       : undefined,
@@ -39,7 +40,6 @@ function Dropdown(props: DropdownProps, ref: React.Ref<DropdownRef>) {
     toggleMenu,
     onLayout,
     menuStyle,
-    scrollViewStyle,
     dropdownLayout,
   } = useDropdown(maxMenuHeight);
   const rightIcon = enable ? menuUpIcon : menuDownIcon;
