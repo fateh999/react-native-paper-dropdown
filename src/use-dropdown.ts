@@ -38,7 +38,7 @@ function useDropdown(maxMenuHeight?: number, maxHeightFraction: number = 2.5) {
     [dropdownLayout.width]
   );
 
-  const scrollViewStyle: ViewStyle = useMemo(
+  const defaultListStyle: ViewStyle = useMemo(
     () => ({
       maxHeight: finalMenuHeight,
     }),
@@ -51,7 +51,7 @@ function useDropdown(maxMenuHeight?: number, maxHeightFraction: number = 2.5) {
     toggleMenu,
     onLayout,
     menuStyle,
-    scrollViewStyle,
+    defaultListStyle,
     dropdownLayout,
   };
 }

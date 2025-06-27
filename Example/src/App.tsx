@@ -157,7 +157,9 @@ export default function App() {
                 onSelect={setGender}
               />
               <View style={styles.spacer} />
-              <Paragraph>Default Dropdown (Outline Mode)</Paragraph>
+              <Paragraph>
+                Default Dropdown (Outline Mode also FlatList)
+              </Paragraph>
               <Dropdown
                 label={'Gender'}
                 placeholder="Select Gender"
@@ -165,6 +167,7 @@ export default function App() {
                 value={gender}
                 onSelect={setGender}
                 mode="outlined"
+                isFlatList
               />
               <View style={styles.spacer} />
               <Paragraph>Custom Dropdown</Paragraph>
@@ -209,7 +212,9 @@ export default function App() {
                 onSelect={setColors}
               />
               <View style={styles.spacer} />
-              <Paragraph>Default Dropdown (Outline Mode)</Paragraph>
+              <Paragraph>
+                Default Dropdown (Outline Mode also FlatList)
+              </Paragraph>
               <MultiSelectDropdown
                 label={'Colors'}
                 placeholder="Select Colors"
@@ -217,6 +222,7 @@ export default function App() {
                 value={colors}
                 onSelect={setColors}
                 mode={'outlined'}
+                isFlatList
               />
 
               <View style={styles.spacer} />

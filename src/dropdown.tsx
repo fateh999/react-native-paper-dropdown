@@ -1,8 +1,8 @@
-import { Platform, ScrollView, StatusBar, View } from 'react-native';
+import { FlatList, Platform, ScrollView, StatusBar, View } from 'react-native';
 import { Menu, TextInput, TouchableRipple } from 'react-native-paper';
 import DropdownItem from './dropdown-item';
 import DropdownInput from './dropdown-input';
-import { DropdownProps, DropdownRef } from './types';
+import { DropdownProps, DropdownRef, Option } from './types';
 import useDropdown from './use-dropdown';
 import { forwardRef, useCallback, useImperativeHandle, useMemo } from 'react';
 import DropdownHeader from './dropdown-header';
@@ -20,10 +20,14 @@ function Dropdown(props: DropdownProps, ref: React.Ref<DropdownRef>) {
     value,
     maxMenuHeight,
     menuContentStyle,
+    listContainerStyle,
     statusBarHeight = Platform.OS === 'android'
       ? StatusBar.currentHeight
       : undefined,
     hideMenuHeader = false,
+    isFlatList = false,
+    flatListProps,
+    scrollViewProps,
     Touchable = TouchableRipple,
     disabled = false,
     error = false,
@@ -39,7 +43,7 @@ function Dropdown(props: DropdownProps, ref: React.Ref<DropdownRef>) {
     toggleMenu,
     onLayout,
     menuStyle,
-    scrollViewStyle,
+    defaultListStyle,
     dropdownLayout,
   } = useDropdown(maxMenuHeight);
   const rightIcon = enable ? menuUpIcon : menuDownIcon;
@@ -58,6 +62,30 @@ function Dropdown(props: DropdownProps, ref: React.Ref<DropdownRef>) {
     onSelect?.(undefined);
     toggleMenu();
   }, [onSelect, toggleMenu]);
+
+  const renderDropdownItem = useCallback(
+    (option: Option, index: number) => (
+      <CustomDropdownItem
+        key={option.value}
+        option={option}
+        value={value}
+        width={dropdownLayout.width}
+        toggleMenu={toggleMenu}
+        onSelect={onSelect}
+        isLast={options.length <= index + 1}
+        menuItemTestID={menuTestID ? `${menuTestID}-${option.value}` : ''}
+      />
+    ),
+    [
+      value,
+      dropdownLayout.width,
+      toggleMenu,
+      onSelect,
+      options,
+      menuTestID,
+      CustomDropdownItem,
+    ]
+  );
 
   return (
     <Menu
@@ -99,22 +127,27 @@ function Dropdown(props: DropdownProps, ref: React.Ref<DropdownRef>) {
           multiSelect={false}
         />
       )}
-      <ScrollView style={scrollViewStyle} bounces={false}>
-        {options.map((option, index) => {
-          return (
-            <CustomDropdownItem
-              key={option.value}
-              option={option}
-              value={value}
-              width={dropdownLayout.width}
-              toggleMenu={toggleMenu}
-              onSelect={onSelect}
-              isLast={options.length <= index + 1}
-              menuItemTestID={menuTestID ? `${menuTestID}-${option.value}` : ''}
-            />
-          );
-        })}
-      </ScrollView>
+
+      {isFlatList ? (
+        <FlatList
+          data={options}
+          bounces={false}
+          renderItem={({ item: option, index }) =>
+            renderDropdownItem(option, index)
+          }
+          keyExtractor={(item) => item.value}
+          style={[defaultListStyle, listContainerStyle]}
+          {...flatListProps}
+        />
+      ) : (
+        <ScrollView
+          style={[defaultListStyle, listContainerStyle]}
+          bounces={false}
+          {...scrollViewProps}
+        >
+          {options.map((option, index) => renderDropdownItem(option, index))}
+        </ScrollView>
+      )}
     </Menu>
   );
 }
